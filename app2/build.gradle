@@ -1,0 +1,20 @@
+apply from:"../config.gradle"
+apply from:"../base.gradle"
+def cfg = rootProject.ext.configuration
+
+android {
+    resourcePrefix "app2_"
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+//    implementation project(':base')
+    annotationProcessor "$cfg.routerCompiler"
+    implementation project(':base')
+    implementation "$cfg.constraint"
+    implementation "$cfg.router"
+    implementation "$cfg.design"
+}

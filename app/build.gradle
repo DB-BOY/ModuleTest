@@ -1,0 +1,27 @@
+apply plugin: 'com.android.application'
+
+apply from:"../base.gradle"
+
+def cfg = rootProject.ext.configuration
+
+android {
+    resourcePrefix "app_"
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    implementation project(':base')
+    implementation project(':app1')
+    implementation project(':app2')
+    implementation "$cfg.router"
+    annotationProcessor "$cfg.routerCompiler"
+    implementation "$cfg.appcompat"
+    implementation "$cfg.constraint"
+    implementation "$cfg.butterknife"
+    annotationProcessor "$cfg.butterknifeCompiler"
+//    compile 'com.jakewharton:butterknife:8.8.1'
+//    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+}

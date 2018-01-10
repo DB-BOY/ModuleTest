@@ -1,0 +1,19 @@
+apply plugin: 'com.android.library'
+
+apply from: "../base.gradle"
+
+def cfg = rootProject.ext.configuration
+android {
+    resourcePrefix "app1_"
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "$cfg.design"
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+//    implementation project(':base')
+    implementation "$cfg.router"
+
+}
